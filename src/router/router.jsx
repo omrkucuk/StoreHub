@@ -16,10 +16,20 @@ export const route = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "about", element: <AboutPage /> },
       { path: "contact", element: <Contact /> },
-      { path: "products", element: <ProductsPage /> },
-      { path: "product/:id", element: <ProductDetail /> },
-      { path: "login", element: <Login /> },
-      { path: "register", element: <Register /> },
+      {
+        path: "products",
+        children: [
+          { index: true, element: <ProductsPage /> },
+          { path: ":id", element: <ProductDetail /> },
+        ],
+      },
+      {
+        path: "auth",
+        children: [
+          { path: "login", element: <Login /> },
+          { path: "register", element: <Register /> },
+        ],
+      },
     ],
   },
 ]);

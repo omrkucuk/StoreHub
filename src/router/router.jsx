@@ -7,7 +7,10 @@ import ProductsPage from "../pages/Products";
 import ProductDetail from "../pages/ProductDetail";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import { productsLoader } from "../services/productService";
+import {
+  productDetailLoader,
+  productsLoader,
+} from "../services/productService";
 
 export const route = createBrowserRouter([
   {
@@ -21,7 +24,11 @@ export const route = createBrowserRouter([
         path: "products",
         children: [
           { index: true, element: <ProductsPage />, loader: productsLoader },
-          { path: ":id", element: <ProductDetail /> },
+          {
+            path: ":id",
+            element: <ProductDetail />,
+            loader: productDetailLoader,
+          },
         ],
       },
       {

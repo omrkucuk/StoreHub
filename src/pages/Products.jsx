@@ -9,10 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 export default function ProductsPage() {
   const products = useLoaderData();
+  const navigate = useNavigate();
   return (
     <div>
       <h2>Product</h2>
@@ -53,7 +54,11 @@ export default function ProductsPage() {
               </Typography>
             </CardContent>
             <CardActions sx={{ justifyContent: "space-between", px: 2 }}>
-              <Button variant="outlined" color="warning">
+              <Button
+                variant="outlined"
+                color="warning"
+                onClick={() => navigate(`/products/${item.id}`)}
+              >
                 Ürünü İncele
               </Button>
               <Stack

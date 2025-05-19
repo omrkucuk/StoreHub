@@ -10,6 +10,6 @@ export const productsLoader = async () => {
     const data = await getAllProducts();
     return data;
   } catch (err) {
-    throw new Response("Ürünler Yüklenmedi", { status: 500 });
+    throw new Response("Ürünler Yüklenmedi", { status: 500 }, err);
   }
 };

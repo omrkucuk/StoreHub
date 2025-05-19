@@ -14,7 +14,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 export default function Navbar() {
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: "#212121" }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "#212121", padding: 2 }}>
       <Container maxWidth="xl">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 5 }}>
@@ -56,7 +56,6 @@ export default function Navbar() {
             <Button
               component={Link}
               to="/auth/register"
-              variant="outlined"
               sx={{ color: "white", borderColor: "white" }}
             >
               Kayıt Ol

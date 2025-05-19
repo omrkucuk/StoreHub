@@ -5,7 +5,7 @@ export default function MainLayout() {
   return (
     <div>
       <Navbar />
-      <div style={{ marginTop: "80px" }}>
+      <div style={{ marginTop: "120px" }}>
         <Outlet />
       </div>
     </div>

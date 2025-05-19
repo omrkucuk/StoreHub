@@ -55,7 +55,7 @@ export default function Navbar() {
 
             <Button
               component={Link}
-              to="/register"
+              to="/auth/register"
               variant="outlined"
               sx={{ color: "white", borderColor: "white" }}
             >

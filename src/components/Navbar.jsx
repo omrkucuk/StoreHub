@@ -14,7 +14,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 export default function Navbar() {
   return (
-    <AppBar sx={{ backgroundColor: "#212121" }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "#212121" }}>
       <Container maxWidth="xl">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 5 }}>
@@ -38,6 +38,12 @@ export default function Navbar() {
             <Button component={Link} to="/products" sx={{ color: "white" }}>
               Ürünler
             </Button>
+            <Button component={Link} to="/about" sx={{ color: "white" }}>
+              Hakkında
+            </Button>
+            <Button component={Link} to="/contact" sx={{ color: "white" }}>
+              İletişim
+            </Button>
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
@@ -49,11 +55,11 @@ export default function Navbar() {
 
             <Button
               component={Link}
-              to="/login"
+              to="/register"
               variant="outlined"
               sx={{ color: "white", borderColor: "white" }}
             >
-              Giriş Yap
+              Kayıt Ol
             </Button>
           </Box>
         </Toolbar>

@@ -21,7 +21,7 @@ export const productsLoader = async () => {
 
 export const productDetailLoader = async ({ params }) => {
   try {
-    const data = getProductById(params.productId);
+    const data = await getProductById(params.id);
     return data;
   } catch (error) {
     console.log("Tek ürün loader hatası:", error);

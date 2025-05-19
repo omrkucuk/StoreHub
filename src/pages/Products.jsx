@@ -16,7 +16,6 @@ export default function ProductsPage() {
   const navigate = useNavigate();
   return (
     <div>
-      <h2>Product</h2>
       <Box
         display="flex"
         flexDirection={"row"}

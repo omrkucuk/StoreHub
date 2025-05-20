@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, TextField, Typography, Box, Stack } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import {
+  Button,
+  TextField,
+  Typography,
+  Box,
+  Stack,
+  Snackbar,
+  Alert,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../services/userService";
 
 const schema = yup.object().shape({
-  username: yup
-    .string()
-    .required("Bu alan zorunludur")
-    .min(3, "En az 3 karakter"),
+  username: yup.string().required("Bu alan zorunlu").min(3, "En az 3 karakter"),
   email: yup
     .string()
-    .required("Email zoruludur")
-    .email("Geçerli bir email giriniz"),
-  password: yup
-    .string()
-    .required("Şifre zorunludur")
-    .min(6, "En az 6 karakter"),
+    .required("Email zorunlu")
+    .email("Geçerli bir email girin"),
+  password: yup.string().required("Şifre zorunlu").min(6, "En az 6 karakter"),
 });
 
 export default function Register() {
@@ -30,10 +33,24 @@ export default function Register() {
   });
 
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log("Kayıt Bilgileri:", data);
-    navigate("/auth/login");
+  const onSubmit = async (data) => {
+    try {
+      const result = await registerUser(data);
+      console.log("Kayıt Başarılı", result);
+      setOpen(true);
+
+      setTimeout(() => {
+        navigate("/auth/login");
+      }, 1500);
+    } catch (error) {
+      console.error("Kayıt hatası", error);
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -49,6 +66,7 @@ export default function Register() {
             {...register("username")}
             error={!!errors.username}
             helperText={errors.username?.message}
+            name="username"
           />
 
           <TextField
@@ -56,6 +74,7 @@ export default function Register() {
             {...register("email")}
             error={!!errors.email}
             helperText={errors.email?.message}
+            name="email"
           />
 
           <TextField
@@ -64,6 +83,7 @@ export default function Register() {
             {...register("password")}
             error={!!errors.password}
             helperText={errors.password?.message}
+            name="password"
           />
 
           <Button variant="contained" color="primary" type="submit">
@@ -71,6 +91,12 @@ export default function Register() {
           </Button>
         </Stack>
       </form>
+
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert severity="success" variant="filled" onClose={handleClose}>
+          Kayıt başarılı! Yönlendiriliyorsunuz...
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

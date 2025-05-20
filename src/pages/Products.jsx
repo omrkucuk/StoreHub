@@ -10,10 +10,12 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
 
 export default function ProductsPage() {
   const products = useLoaderData();
   const navigate = useNavigate();
+  const { addToCart } = useCart();
   return (
     <div>
       <Box
@@ -67,7 +69,9 @@ export default function ProductsPage() {
                 gap={1}
               >
                 <Typography>{item.price} TL</Typography>
-                <Button size="medium">Sepete Ekle</Button>
+                <Button size="medium" onClick={() => addToCart(item)}>
+                  Sepete Ekle
+                </Button>
               </Stack>
             </CardActions>
           </Card>

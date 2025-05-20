@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -12,10 +12,14 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { useCart } from "../contexts/CartContext";
+import CartDrawer from "./CartDrawer";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const { totalItems } = useCart();
+  const [open, setOpen] = useState();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -56,11 +60,16 @@ export default function Navbar() {
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-            <IconButton size="large" color="inherit">
-              <Badge badgeContent={1} color="warning">
+            <IconButton
+              size="large"
+              color="inherit"
+              onClick={() => setOpen(true)}
+            >
+              <Badge badgeContent={totalItems} color="warning">
                 <ShoppingCartOutlinedIcon />
               </Badge>
             </IconButton>
+            <CartDrawer open={open} onClose={() => setOpen(false)} />
 
             <Stack direction="row" spacing={2}>
               {token ? (

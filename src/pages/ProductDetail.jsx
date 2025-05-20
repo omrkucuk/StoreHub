@@ -10,10 +10,15 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useCart } from "../contexts/CartContext";
 
 export default function ProductDetail() {
   const product = useLoaderData();
   const navigate = useNavigate();
+
+  const { addToCart, cartItems } = useCart();
+
+  console.log("Sepetteki ürünler: ", cartItems);
 
   return (
     <Box display="flex" justifyContent="center" mt={5}>
@@ -36,7 +41,11 @@ export default function ProductDetail() {
           </Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: "space-between" }}>
-          <Button variant="contained" color="warning">
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={() => addToCart(product)}
+          >
             Sepete Ekle
           </Button>
           <Button variant="outlined" onClick={() => navigate(-1)}>

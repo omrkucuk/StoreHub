@@ -3,7 +3,16 @@ import { Box, Container, Typography, Stack, Link } from "@mui/material";
 
 export default function Footer() {
   return (
-    <Box sx={{ bgcolor: "#212121", color: "white", py: 3, mt: 5 }}>
+    <Box
+      sx={{
+        bgcolor: "#212121",
+        color: "white",
+        py: 3,
+        mt: 5,
+        bottom: 0,
+        width: "100%",
+      }}
+    >
       <Container maxWidth="lg">
         <Stack
           direction={{ xs: "column", sm: "row" }}

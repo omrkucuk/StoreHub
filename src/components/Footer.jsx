@@ -8,9 +8,6 @@ export default function Footer() {
         bgcolor: "#212121",
         color: "white",
         py: 3,
-        mt: 5,
-        bottom: 0,
-        width: "100%",
       }}
     >
       <Container maxWidth="lg">

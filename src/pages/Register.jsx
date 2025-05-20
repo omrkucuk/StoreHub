@@ -97,6 +97,17 @@ export default function Register() {
           Kayıt başarılı! Yönlendiriliyorsunuz...
         </Alert>
       </Snackbar>
+
+      <Box
+        display={"flex"}
+        flexDirection={"row"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        mt={2}
+      >
+        <Typography>Hesabın var mı ?</Typography>
+        <Button onClick={() => navigate("/auth/login")}>Giriş Yap</Button>
+      </Box>
     </Box>
   );
 }

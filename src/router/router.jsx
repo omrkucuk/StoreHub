@@ -11,6 +11,7 @@ import {
   productDetailLoader,
   productsLoader,
 } from "../services/productService";
+import PrivateRoute from "../auth/PrivateRoute";
 
 export const route = createBrowserRouter([
   {
@@ -23,10 +24,22 @@ export const route = createBrowserRouter([
       {
         path: "products",
         children: [
-          { index: true, element: <ProductsPage />, loader: productsLoader },
+          {
+            index: true,
+            element: (
+              <PrivateRoute>
+                <ProductsPage />
+              </PrivateRoute>
+            ),
+            loader: productsLoader,
+          },
           {
             path: ":id",
-            element: <ProductDetail />,
+            element: (
+              <PrivateRoute>
+                <ProductDetail />{" "}
+              </PrivateRoute>
+            ),
             loader: productDetailLoader,
           },
         ],

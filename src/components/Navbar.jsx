@@ -8,11 +8,20 @@ import {
   Badge,
   Button,
   Box,
+  Stack,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/auth/login");
+  };
+
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "#212121", padding: 2 }}>
       <Container maxWidth="xl">
@@ -53,13 +62,22 @@ export default function Navbar() {
               </Badge>
             </IconButton>
 
-            <Button
-              component={Link}
-              to="/auth/register"
-              sx={{ color: "white", borderColor: "white" }}
-            >
-              Kayıt Ol
-            </Button>
+            <Stack direction="row" spacing={2}>
+              {token ? (
+                <Button color="inherit" onClick={handleLogout}>
+                  Çıkış Yap
+                </Button>
+              ) : (
+                <>
+                  <Button color="inherit" component={Link} to="/auth/login">
+                    Giriş Yap
+                  </Button>
+                  <Button color="inherit" component={Link} to="/auth/register">
+                    Kayıt Ol
+                  </Button>
+                </>
+              )}
+            </Stack>
           </Box>
         </Toolbar>
       </Container>

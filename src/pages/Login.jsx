@@ -95,6 +95,16 @@ export default function Login() {
           {loginError}
         </Typography>
       )}
+      <Box
+        display={"flex"}
+        flexDirection={"row"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        mt={2}
+      >
+        <Typography>Hesabın yok mu ?</Typography>
+        <Button onClick={() => navigate("/auth/register")}>Kayıt Ol</Button>
+      </Box>
     </Box>
   );
 }

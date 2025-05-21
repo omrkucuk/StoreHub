@@ -1,6 +1,6 @@
 import React from "react";
 import { useCart } from "../contexts/CartContext";
-import { Box, Button, Drawer, Typography } from "@mui/material";
+import { Box, Button, Drawer, Stack, Typography } from "@mui/material";
 
 export default function CartDrawer({ open, onClose }) {
   const {
@@ -10,6 +10,7 @@ export default function CartDrawer({ open, onClose }) {
     totalItems,
     totalPrice,
     decreaseQuantity,
+    addToCart,
   } = useCart();
   return (
     <Drawer anchor="right" open={open} onClose={onClose}>
@@ -27,20 +28,31 @@ export default function CartDrawer({ open, onClose }) {
                 <Typography variant="subtitle1">{item.title}</Typography>
                 <Typography>Adet: {item.quantity}</Typography>
                 <Typography>Fiyat: {item.price}</Typography>
-                <Button
-                  color="primary"
-                  onClick={() => decreaseQuantity(item.id)}
-                  sx={{ marginRight: 1 }}
-                >
-                  -
-                </Button>
-                <Button
-                  variant="text"
-                  color="error"
-                  onClick={() => removeFromCart(item.id)}
-                >
-                  Sil
-                </Button>
+                <Stack direction={"row"} gap={2} paddingY={2}>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    size="small"
+                    onClick={() => addToCart(item)}
+                  >
+                    +
+                  </Button>
+                  <Button
+                    color="warning"
+                    variant="contained"
+                    onClick={() => decreaseQuantity(item.id)}
+                    sx={{ marginRight: 1 }}
+                  >
+                    -
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => removeFromCart(item.id)}
+                  >
+                    Sil
+                  </Button>
+                </Stack>
               </Box>
             ))}
 
